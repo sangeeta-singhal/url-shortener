@@ -7,8 +7,9 @@ import com.example.urlShortener.dto.ShortenUrlRequest;
 import com.example.urlShortener.dto.ShortenUrlResponse;
 import com.example.urlShortener.service.UrlShortenerService;
 
+import jakarta.validation.Valid;
+
 import java.net.URI;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UrlShortenerController {
     }
 
     @PostMapping
-    public ResponseEntity<ShortenUrlResponse> shortenUrl(@RequestBody ShortenUrlRequest request) {
+    public ResponseEntity<ShortenUrlResponse> shortenUrl(@Valid @RequestBody ShortenUrlRequest request) {
         String shortCode = service.shortenenUrl(request.getOriginalUrl());
         String shortUrl = BASE_URL + shortCode;
 
