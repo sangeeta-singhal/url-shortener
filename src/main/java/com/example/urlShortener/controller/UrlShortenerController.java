@@ -1,6 +1,5 @@
 package com.example.urlShortener.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.urlShortener.dto.ShortenUrlRequest;
@@ -19,9 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-
 @RestController
-@RequestMapping("/api/urls")
 public class UrlShortenerController {
 
     private final UrlShortenerService service;
@@ -31,7 +28,7 @@ public class UrlShortenerController {
         this.service = service;
     }
 
-    @PostMapping
+    @PostMapping("/api/urls")
     public ResponseEntity<ShortenUrlResponse> shortenUrl(@Valid @RequestBody ShortenUrlRequest request) {
         String shortCode = service.shortenenUrl(request.getOriginalUrl());
         String shortUrl = BASE_URL + shortCode;
