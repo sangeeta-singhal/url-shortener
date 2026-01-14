@@ -27,16 +27,16 @@ public class UrlShortenerServiceImpl implements UrlShortenerService {
             return existing.get().getShortCode();
         }
 
-        String shortCode = encoder.generateShortCode();
+        UrlMapping mapping = new UrlMapping();
+        mapping.setOriginalUrl(originalUrl);
 
-        while (repository.findByShortCode(shortCode).isPresent()) {
-            shortCode = encoder.generateShortCode();
-        }
+        UrlMapping saved = repository.save(mapping);
+
+        String shortCode = encoder.generateShortCode(saved.getId());
+        saved.setShortCode(shortCode);
+        repository.save(saved);
 
         logger.info("Generated shot code {} for URL {}", shortCode, originalUrl);
-        UrlMapping mapping = new UrlMapping(originalUrl, shortCode);
-        repository.save(mapping);
-
         return shortCode;
     }
 

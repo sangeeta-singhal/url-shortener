@@ -16,12 +16,12 @@ import jakarta.persistence.UniqueConstraint;
 public class UrlMapping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 2048)
     private String originalUrl;
 
-    @Column(nullable = false, unique = true, length = 10)
+    @Column(unique = true, length = 10)
     private String shortCode;
 
     private LocalDateTime createdAt;
@@ -34,12 +34,16 @@ public class UrlMapping {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
     public String getOriginalUrl() {
         return originalUrl;
+    }
+
+    public void setOriginalUrl(String originalUrl) {
+        this.originalUrl = originalUrl;
     }
 
     public String getShortCode() {
