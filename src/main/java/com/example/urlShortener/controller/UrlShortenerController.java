@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 @RestController
 public class UrlShortenerController {
 
@@ -37,7 +36,7 @@ public class UrlShortenerController {
                 .status(HttpStatus.CREATED)
                 .body(new ShortenUrlResponse(shortUrl));
     }
-    
+
     @GetMapping("/{shortCode}")
     public ResponseEntity<Void> redirect(@PathVariable String shortCode) {
 
