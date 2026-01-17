@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 
 import java.net.URI;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class UrlShortenerController {
 
     private final UrlShortenerService service;
-    private static final String BASE_URL = "http://localhost:8080/";
+    private final String baseUrl;
 
-    public UrlShortenerController(UrlShortenerService service) {
+    public UrlShortenerController(UrlShortenerService service, @Value("${app.base-url}") String baseUrl) {
         this.service = service;
+        this.baseUrl = baseUrl;
     }
 
     @PostMapping("/api/urls")
     public ResponseEntity<ShortenUrlResponse> shortenUrl(@Valid @RequestBody ShortenUrlRequest request) {
         String shortCode = service.shortenenUrl(request.getOriginalUrl());
-        String shortUrl = BASE_URL + shortCode;
+        String shortUrl = baseUrl + shortCode;
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

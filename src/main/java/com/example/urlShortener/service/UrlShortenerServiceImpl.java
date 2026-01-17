@@ -29,6 +29,7 @@ public class UrlShortenerServiceImpl implements UrlShortenerService {
 
         UrlMapping mapping = new UrlMapping();
         mapping.setOriginalUrl(originalUrl);
+        mapping.set
 
         UrlMapping saved = repository.save(mapping);
 
