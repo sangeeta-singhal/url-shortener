@@ -1,6 +1,9 @@
 package com.example.urlShortener.model;
 
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +27,7 @@ public class UrlMapping {
     @Column(unique = true, length = 10)
     private String shortCode;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     public UrlMapping() {}
@@ -31,7 +35,6 @@ public class UrlMapping {
     public UrlMapping(String originalUrl, String shortCode) {
         this.shortCode = shortCode;
         this.originalUrl = originalUrl;
-        this.createdAt = LocalDateTime.now();
     }
 
     public long getId() {
